@@ -1,4 +1,4 @@
-import 'package:appcontabancaria/screens/transacao_form.dart';
+import 'package:appcontabancaria/screens/transacoes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyBank extends StatelessWidget {
           textTheme: ButtonTextTheme.primary
         )
       ),
-      home: TransacaoForm(),
+      home: Transacoes(),
     );
   }
 }

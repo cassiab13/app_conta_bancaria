@@ -1,4 +1,3 @@
-import 'package:appcontabancaria/screens/transacoes.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {

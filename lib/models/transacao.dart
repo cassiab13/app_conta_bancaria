@@ -1,8 +1,8 @@
 import 'package:appcontabancaria/models/enums/tipo_transacao.dart';
 
 class Transacao {
-  final TipoTransacao tipo;
-  final double valor;
+  TipoTransacao tipo;
+  double valor;
 
   Transacao(this.tipo, this.valor);
   

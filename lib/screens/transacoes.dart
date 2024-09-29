@@ -1,4 +1,3 @@
-import 'package:appcontabancaria/components/list_card.dart';
 import 'package:appcontabancaria/models/enums/tipo_transacao.dart';
 import 'package:appcontabancaria/models/transacao.dart';
 import 'package:appcontabancaria/screens/transacao_form.dart';
@@ -23,9 +22,34 @@ class _TransacoesState extends State<Transacoes> {
       body: ListView.builder(
         itemCount: widget._transacoes.length,
         itemBuilder: (context, index) {
-          return ListCard(
-              title: widget._transacoes[index].valor.toString(),
-              subtitle: widget._transacoes[index].tipo.name);
+          return ListTile(
+              title: Text(widget._transacoes[index].valor.toString()),
+              subtitle: Text(widget._transacoes[index].tipo.name),
+              trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return TransacaoForm(
+                            transacao: widget._transacoes[index]);
+                      })).then((transacaoAtualizada) {
+                        if (transacaoAtualizada != null) {
+                          setState(() {
+                            widget._transacoes[index] = transacaoAtualizada;
+                          });
+                        }
+                      });
+                    }),
+                IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () {
+                    setState(() {
+                      widget._transacoes.removeAt(index);
+                    });
+                  },
+                )
+              ]));
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -33,7 +57,11 @@ class _TransacoesState extends State<Transacoes> {
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return TransacaoForm();
-            })).then((novaTransacao) => _atualizaTransacoes(novaTransacao));
+            })).then((novaTransacao) {
+              if (novaTransacao != null) {
+                _atualizaTransacoes(novaTransacao);
+              }
+            });
           }),
     );
   }
